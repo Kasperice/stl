@@ -35,10 +35,9 @@ std::array<std::array<uint8_t, 240>, 160> decompressGrayscale(const std::vector<
             std::vector<uint8_t> rowVector;
             //TODO Fix everything below this line as it's not filling decompressed array properly
             std::advance(secIt, count);
-            if (secIt != image.end())
-                std::for_each(it, secIt, [&rowVector](const auto& el) { 
-                                            for(auto i = 0; i < el.second; i++) 
-                                                rowVector.push_back(el.first); });
+            std::for_each(it, secIt, [&rowVector](const auto& el) { 
+                                        for(auto i = 0; i < el.second; i++) 
+                                            rowVector.push_back(el.first); });
             it = secIt;
             std::copy(rowVector.begin(), rowVector.end(), row.begin());
         }
