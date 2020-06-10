@@ -23,19 +23,21 @@ std::vector<std::pair<uint8_t, uint8_t>> compressGrayscale(const std::array<std:
 std::array<std::array<uint8_t, 240>, 160> decompressGrayscale(const std::vector<std::pair<uint8_t, uint8_t>>& image) {
     std::array<std::array<uint8_t, 240>, 160> decompressed{};
     int columnSize = 240;
+    //TODO Change iterator names
     auto it = image.begin();
 
     for (auto& row : decompressed) {
-        for (it; it != image.end();) {
-            int count = std::count_if(image.begin(), image.end(),
-                                      [sum{0}, columnSize](std::pair<uint8_t, uint8_t> el) mutable { 
+        while (it != image.end()) {
+            int count = std::count_if(it, image.end(),
+                                      [sum{0}, columnSize](const auto& el) mutable { 
                                           sum+=el.second; return sum <= columnSize; });
             auto secIt = it;
-            std::advance(secIt, count);
             std::vector<uint8_t> rowVector;
+            //TODO Fix everything below this line as it's not filling decompressed array properly
+            std::advance(secIt, count);
             if (secIt != image.end())
-                std::for_each(it, secIt, [&rowVector](auto el) { 
-                                            for(auto i = 0; i <= el.second; i++) 
+                std::for_each(it, secIt, [&rowVector](const auto& el) { 
+                                            for(auto i = 0; i < el.second; i++) 
                                                 rowVector.push_back(el.first); });
             it = secIt;
             std::copy(rowVector.begin(), rowVector.end(), row.begin());
