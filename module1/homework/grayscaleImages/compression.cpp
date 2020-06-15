@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <utility>
 
-std::vector<std::pair<uint8_t, uint8_t>> compressGrayscale(const std::array<std::array<uint8_t, 240>, 160>& image) {
+std::vector<std::pair<uint8_t, uint8_t>> compressGrayscale(const std::array<std::array<uint8_t, width>, height>& image) {
     std::vector<std::pair<uint8_t, uint8_t>> compressed{};
 
     for (const auto& row : image) {
@@ -20,9 +20,9 @@ std::vector<std::pair<uint8_t, uint8_t>> compressGrayscale(const std::array<std:
     return compressed;
 }
 
-std::array<std::array<uint8_t, 240>, 160> decompressGrayscale(const std::vector<std::pair<uint8_t, uint8_t>>& image) {
-    std::array<std::array<uint8_t, 240>, 160> decompressed{};
-    int columnSize = 240;
+std::array<std::array<uint8_t, width>, height> decompressGrayscale(const std::vector<std::pair<uint8_t, uint8_t>>& image) {
+    std::array<std::array<uint8_t, width>, height> decompressed{};
+    int columnSize = width;
     //TODO Change iterator names
     auto it = image.begin();
 
@@ -31,6 +31,7 @@ std::array<std::array<uint8_t, 240>, 160> decompressGrayscale(const std::vector<
             int count = std::count_if(it, image.end(),
                                       [sum{0}, columnSize](const auto& el) mutable { 
                                           sum+=el.second; return sum <= columnSize; });
+            count;
             auto secIt = it;
             std::vector<uint8_t> rowVector;
             //TODO Fix everything below this line as it's not filling decompressed array properly
