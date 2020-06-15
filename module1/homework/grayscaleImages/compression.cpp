@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <utility>
 
-std::vector<std::pair<uint8_t, uint8_t>> compressGrayscale(const std::array<std::array<uint8_t, 240>, 160>& image) {
+std::vector<std::pair<uint8_t, uint8_t>> compressGrayscale(const std::array<std::array<uint8_t, width>, height>& image) {
     std::vector<std::pair<uint8_t, uint8_t>> compressed{};
 
     for (const auto& row : image) {
@@ -20,7 +20,7 @@ std::vector<std::pair<uint8_t, uint8_t>> compressGrayscale(const std::array<std:
     return compressed;
 }
 
-std::array<std::array<uint8_t, 240>, 160> decompressGrayscale(const std::vector<std::pair<uint8_t, uint8_t>>& image) {
+std::array<std::array<uint8_t, width>, height> decompressGrayscale(const std::vector<std::pair<uint8_t, uint8_t>>& image) {
     std::array<std::array<uint8_t, 240>, 160> decompressed{};
 
     return decompressed;

@@ -7,8 +7,7 @@
 #include "compression.hpp"
 #include "gtest/gtest.h"
 
-const int height = 160;
-const int width = 240;
+
 
 void expectBitmap(const std::vector<std::pair<uint8_t, uint8_t>>& bitmap, size_t fraction) {
     for (int j = 0; j < fraction; j++) {
